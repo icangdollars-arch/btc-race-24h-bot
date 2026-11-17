@@ -248,7 +248,7 @@ def _check_order(value, where):
     if not isinstance(value, dict):
         raise OrderError(f"{where}: expected an order dict, got {_describe(value)}")
     side = value.get("side")
-    if not isinstance(side, str) or not _SYMBOL_RE.fullmatch(side):
+    if side not in ("buy", "sell"):
         raise OrderError(f'{where}: side must be "buy" or "sell", got {_describe(side)}')
     keys = _KEYS[side]
     for k in value:
